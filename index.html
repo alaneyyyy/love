@@ -695,7 +695,33 @@
     <div class="bg" id="bg"></div>
     <div class="noise"></div>
 
-    <audio id="music" src="music.mp3" loop preload="auto"></audio>
+    <audio id="music" src="1mus.mp3" preload="auto"></audio>
+
+    <script>
+      const audio = document.getElementById('music');
+      
+      // Названия твоих песен по порядку
+      const playlist = ['1mus.mp3', 'second_song.mp3']; 
+      let currentTrack = 0;
+
+      audio.onended = function() {
+        currentTrack++; // Переходим к следующей
+        
+        // Если песни в списке закончились (дошли до конца 2-й)
+        if (currentTrack >= playlist.length) {
+          currentTrack = 0; // Сбрасываем на первую песню
+        }
+        
+        audio.src = playlist[currentTrack]; // Ставим нужный файл
+        audio.play(); // Запускаем
+      };
+
+      // Автозапуск при первом клике на страницу
+      window.addEventListener('click', () => {
+        if (audio.paused) audio.play();
+      }, { once: true });
+    </script>
+    
 
     <!-- ========== S1: Login ========== -->
     <section id="s1" class="visible">
